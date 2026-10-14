@@ -1,0 +1,36 @@
+{
+  "context": "Push from a Go service without leaking the token",
+  "type": "weighted_checklist",
+  "checklist": [
+    {
+      "name": "env_config",
+      "description": "Passes the token through `GIT_CONFIG_COUNT`, `GIT_CONFIG_KEY_n`, and `GIT_CONFIG_VALUE_n` (or an equivalent that keeps it out of argv), not `-c` on the command line.",
+      "max_score": 3,
+      "category": "EDGE_CASE"
+    },
+    {
+      "name": "no_url_token",
+      "description": "Never embeds the token in the remote URL or writes it to `.git/config`.",
+      "max_score": 3,
+      "category": "EDGE_CASE"
+    },
+    {
+      "name": "scrubbed_errors",
+      "description": "Removes the token from git output before it reaches an error or a log line.",
+      "max_score": 2,
+      "category": "EDGE_CASE"
+    },
+    {
+      "name": "no_prompt",
+      "description": "Sets `GIT_TERMINAL_PROMPT=0` so an expired token fails fast instead of hanging.",
+      "max_score": 1,
+      "category": "INTENT"
+    },
+    {
+      "name": "plain_push",
+      "description": "Uses an ordinary `git push` with no partial clone (`--filter`) on the clone.",
+      "max_score": 1,
+      "category": "INTENT"
+    }
+  ]
+}

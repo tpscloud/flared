@@ -1,0 +1,4 @@
+interface:
+  display_name: "Cloudflare Artifacts"
+  short_description: "Git repos for agents on Cloudflare Artifacts"
+  default_prompt: "Use $cloudflare-artifacts to create, fork, and access Cloudflare Artifacts repos safely."

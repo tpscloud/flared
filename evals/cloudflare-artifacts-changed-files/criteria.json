@@ -1,0 +1,36 @@
+{
+  "context": "Which files did a push change?",
+  "type": "weighted_checklist",
+  "checklist": [
+    {
+      "name": "no_diff_api",
+      "description": "Does not call a diff or compare method on the binding or REST API; computes changes by reading the `before` and `after` commits and comparing their trees (or delegates to a git client).",
+      "max_score": 4,
+      "category": "EDGE_CASE"
+    },
+    {
+      "name": "zero_before",
+      "description": "Treats a missing or all-zero `before` (a new branch, if the payload uses the git convention) as an empty tree instead of failing to read it.",
+      "max_score": 1,
+      "category": "EDGE_CASE"
+    },
+    {
+      "name": "skips_equal_subtrees",
+      "description": "Skips subtrees whose hashes match instead of reading every tree in the repo.",
+      "max_score": 1,
+      "category": "DESIGN"
+    },
+    {
+      "name": "ack_retry",
+      "description": "Acknowledges each message after it is handled and retries it on failure, and keeps handling idempotent because delivery is at least once.",
+      "max_score": 2,
+      "category": "INTENT"
+    },
+    {
+      "name": "commits_not_trusted",
+      "description": "Does not rely on `commits[]` alone for the file list (it carries no paths and can be truncated).",
+      "max_score": 1,
+      "category": "EDGE_CASE"
+    }
+  ]
+}

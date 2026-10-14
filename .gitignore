@@ -1,0 +1,6 @@
+# example dependencies and build output
+node_modules/
+*.test
+__pycache__/
+*.pyc
+.DS_Store

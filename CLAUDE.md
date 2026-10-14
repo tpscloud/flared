@@ -1,0 +1,3 @@
+# flared
+
+@AGENTS.md

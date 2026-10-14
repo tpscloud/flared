@@ -1,0 +1,30 @@
+{
+  "context": "Keep EU customers' repos in the EU",
+  "type": "weighted_checklist",
+  "checklist": [
+    {
+      "name": "explicit_namespace",
+      "description": "Creates a separate namespace with jurisdiction `eu` explicitly through the REST API before any repo is created in it, rather than relying on implicit namespace creation.",
+      "max_score": 3,
+      "category": "EDGE_CASE"
+    },
+    {
+      "name": "immutable_warning",
+      "description": "States that a namespace's jurisdiction cannot be changed later, so an existing namespace cannot be moved to the EU.",
+      "max_score": 2,
+      "category": "INTENT"
+    },
+    {
+      "name": "second_binding",
+      "description": "Adds a second Artifacts binding for the EU namespace and picks the binding by region in code.",
+      "max_score": 2,
+      "category": "DESIGN"
+    },
+    {
+      "name": "token_handling",
+      "description": "Does not log or return the token from `create()` to an untrusted caller.",
+      "max_score": 1,
+      "category": "EDGE_CASE"
+    }
+  ]
+}

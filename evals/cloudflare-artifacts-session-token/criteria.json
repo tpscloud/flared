@@ -1,0 +1,36 @@
+{
+  "context": "A per-agent workspace with its own token",
+  "type": "weighted_checklist",
+  "checklist": [
+    {
+      "name": "fork_per_agent",
+      "description": "Forks `baseline` into a new repo for the agent instead of handing out a token for `baseline` itself or a shared repo.",
+      "max_score": 3,
+      "category": "DESIGN"
+    },
+    {
+      "name": "scoped_ttl",
+      "description": "Mints a token with an explicit scope and an explicit TTL of about an hour (for example `createToken(\"write\", 3600)`), not the 24 hour default.",
+      "max_score": 2,
+      "category": "EDGE_CASE"
+    },
+    {
+      "name": "initial_token",
+      "description": "Revokes the token returned by `fork()` (it carries the 24 hour default TTL) after minting the scoped one, and never logs or returns it.",
+      "max_score": 2,
+      "category": "EDGE_CASE"
+    },
+    {
+      "name": "disposes_handles",
+      "description": "Declares repo handles from `env.ARTIFACTS.get()` with `using` (or disposes them explicitly).",
+      "max_score": 1,
+      "category": "INTENT"
+    },
+    {
+      "name": "token_in_header",
+      "description": "The shell commands pass the token as an `http.extraHeader` Authorization header per command (with `-c` or the `GIT_CONFIG_COUNT`/`GIT_CONFIG_KEY_n`/`GIT_CONFIG_VALUE_n` environment form), not inside the remote URL or with `git remote add`.",
+      "max_score": 2,
+      "category": "EDGE_CASE"
+    }
+  ]
+}

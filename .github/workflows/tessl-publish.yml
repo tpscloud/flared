@@ -1,0 +1,61 @@
+# Copyright 2026 John Deatherage (@coversheets). SPDX-License-Identifier: MIT
+name: Publish to Tessl
+
+# Publishing runs Tessl's evals, which cost credits. Only plugin content
+# starts this workflow, and it publishes only when the version in
+# .tessl-plugin/plugin.json is not in the registry yet.
+on:
+  push:
+    branches: [main]
+    paths:
+      - "skills/**"
+      - "evals/**"
+      - ".tessl-plugin/plugin.json"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: tessl-publish
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: tesslio/setup-tessl@25ec223fc0da33b41b8044ff5ab2b85235f4f91e # v2
+        with:
+          version: "0.114.0"
+          token: ${{ secrets.TESSL_TOKEN }}
+      - name: Check the Tessl credentials
+        run: tessl whoami
+      - name: Lint the plugin manifest
+        run: tessl plugin lint .
+      - name: Skip versions that are already published
+        id: version
+        run: |
+          version="$(jq -r .version .tessl-plugin/plugin.json)"
+          # info exits 1 for a missing version and for network or registry
+          # errors alike, so publish only on the two not-found messages of
+          # the pinned CLI. Anything else fails here instead of starting a
+          # paid publish of a version that may already exist.
+          if out="$(tessl plugin info "tpscloud/flared@${version}" 2>&1)"; then
+            echo "Version ${version} is already published; bump it to publish." >> "$GITHUB_STEP_SUMMARY"
+            echo "publish=false" >> "$GITHUB_OUTPUT"
+          elif grep -qE 'has no version "|Could not find plugin "' <<<"$out"; then
+            echo "publish=true" >> "$GITHUB_OUTPUT"
+          else
+            printf 'Could not tell whether %s is published:\n%s\n' "$version" "$out" >&2
+            exit 1
+          fi
+      - name: Publish tpscloud/flared
+        if: steps.version.outputs.publish == 'true'
+        run: tessl plugin publish .

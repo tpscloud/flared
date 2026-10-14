@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "skills": [
+    "skills/cloudflare-artifacts/SKILL.md"
+  ],
+  "checks": [
+    {
+      "name": "Type-check and test the examples",
+      "command": [
+        "bash",
+        "scripts/check.sh"
+      ]
+    }
+  ],
+  "frontmatter": {
+    "allowedKeys": [
+      "name",
+      "description",
+      "license"
+    ],
+    "requireDirectoryName": true
+  }
+}

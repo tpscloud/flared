@@ -1,0 +1,9 @@
+{
+  "name": "tpscloud/flared",
+  "description": "Agent skills for Cloudflare, starting with Artifacts: Git repos for agents through the Workers binding, the REST API, and plain git, with type-checked TypeScript and tested Go examples.",
+  "private": false,
+  "skills": [
+    "skills/cloudflare-artifacts"
+  ],
+  "version": "0.1.0"
+}
