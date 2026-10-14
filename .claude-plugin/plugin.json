@@ -1,7 +1,7 @@
 {
   "name": "flared",
   "description": "Agent skills for Cloudflare, starting with Artifacts: Git repos for agents through the Workers binding, the REST API, and plain git, with type-checked TypeScript and tested Go examples.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": {
     "name": "coversheets"
   },

@@ -126,6 +126,16 @@ for a deleted one, or `after` for an annotated tag. Git uses forty zeros for
 the first two and a tag object for the third, so the consumer below handles
 branches only until you have seen those payloads from your account.
 
+## Untrusted fields
+
+Anyone who can push to a repo writes `commits[].message`, `author` and
+`committer` in its push events, and `sourceUrl` comes from whoever asked for
+the import. When an agent or model reads an event, these fields can carry
+an indirect prompt injection. Route on `type`, `source`, `ref`, `before` and
+`after`. If a model has to see message text, pass it as quoted data with a
+length limit and tell the model it is untrusted. Never paste it into a
+system prompt, a shell command or a URL.
+
 ## Consumer Worker
 
 ```jsonc
