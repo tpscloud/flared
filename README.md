@@ -2,7 +2,7 @@
 
 [![version](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Ftpscloud%2Fflared%2Fmain%2F.tessl-plugin%2Fplugin.json&query=%24.version&label=version&prefix=v)](https://tessl.io/registry/tpscloud/flared)
 [![Skill quality](https://github.com/tpscloud/flared/actions/workflows/skill-quality.yml/badge.svg)](https://github.com/tpscloud/flared/actions/workflows/skill-quality.yml)
-[![skills.sh](https://www.skills.sh/b/tpscloud/flared)](https://www.skills.sh/tpscloud/flared)
+[![skills.sh](https://www.skills.sh/b/tpscloud/flared?label=skills.sh)](https://www.skills.sh/tpscloud/flared)
 [![tessl](https://img.shields.io/endpoint?url=https%3A%2F%2Fapi.tessl.io%2Fv1%2Fbadges%2Ftpscloud%2Fflared)](https://tessl.io/registry/tpscloud/flared)
 
 Skills for AI coding agents that build on Cloudflare. Each skill is written
