@@ -21,10 +21,12 @@ Snyk rated cloudflare-artifacts medium risk with one finding, W011
 (third-party content exposure). The skill shows how to consume Artifacts
 events from Queues and Workflows, and those messages carry text written by
 whoever pushed to the repo, such as commit messages and author names. An
-agent that reads that text could meet an indirect prompt injection, so treat
-it as untrusted data.
+agent that reads that text could meet an indirect prompt injection. That scan
+covered 0.1.0. Version 0.1.1 adds a rule to treat commit text, author fields
+and repo files as untrusted data, and a section in the events reference on
+handling them; this table will be updated when Snyk scans it.
 
 For the whole plugin, Tessl also publishes
-[eval results](https://tessl.io/registry/tpscloud/flared/0.1.0/evals)
-and a [security report](https://tessl.io/registry/tpscloud/flared/0.1.0/security)
-for 0.1.0. Its security review rated the plugin low risk.
+[eval results](https://tessl.io/registry/tpscloud/flared/0.1.1/evals)
+and a [security report](https://tessl.io/registry/tpscloud/flared/0.1.1/security)
+for 0.1.1. Its security review rated the plugin low risk.
